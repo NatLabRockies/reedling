@@ -149,7 +149,7 @@ format_techs <- function(df, mapping, tech_colors=NULL, tech_col="i", col_from="
   # TODO: finish updating here
   #df$tech <- stringr::str_replace_all(tolower(df$i), stats::setNames(as.character(mapping[, col_to]),
   #                                                                   as.character(mapping[, col_from])))
-  df$tech <- plyr::mapvalues(tolower(df$i), from=mapping[, col_from], to=mapping[, col_to])
+  df$tech <- plyr::mapvalues(tolower(df$i), from=tolower(mapping[, col_from]), to=mapping[, col_to])
 
   # check for unmapped technologies
   missing_techs <- unique(df$i[is.na(df$tech)])
@@ -159,7 +159,11 @@ format_techs <- function(df, mapping, tech_colors=NULL, tech_col="i", col_from="
   df_mapped <- df[,by=.(i,tech), .(obs=length(i))]
   cat("Mapped the following technologies:\n\n")
   df_mapped <- df_mapped[order(df_mapped$i)]
-  print(sprintf("%-25s --> %s", df_mapped$i, df_mapped$tech))
+
+  for(i in 1:nrow(df_mapped)){
+    print(sprintf("%-25s --> %s", df_mapped$i[i], df_mapped$tech[i]))
+  }
+
   # apply levels for tech_colors if specified
   if (!is.null(tech_colors)){
     cat("Formatting tech levels\n\n")
