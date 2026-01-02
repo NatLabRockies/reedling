@@ -2,7 +2,7 @@ raw,agg1,agg2
 battery_li,battery,storage
 beccs_mod,beccs,biopower
 biopower,biopower,biopower
-can-imports,imports,other
+can-imports,can-imports,other
 coal-ccs_mod,coal-ccs,coal
 coal-igcc,coal,coal
 coal-new,coal,coal

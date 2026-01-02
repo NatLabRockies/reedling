@@ -9,3 +9,12 @@
 #'   \item{agg1, agg2}{Two alternative options for technology categories}
 #' }
 "tech_map"
+
+#' ReEDS technology colors
+#'
+#' Named character vector with standard technology colors. The order of the entries can
+#' can be used to set levels for a typical dispatch stack plot.
+#' 
+#' @format ## `tech_colors`
+#' Named character vector of technology colors.
+"tech_colors"
