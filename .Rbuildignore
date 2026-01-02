@@ -1,3 +1,4 @@
-^reedling\.Rproj$
-^\.Rproj\.user$
-^LICENSE\.md$
+^reedling\.Rproj$   # R Project File
+^\.Rproj\.user$     # Used by RStudio for temporary files
+^LICENSE\.md$       # Full text of the license
+^data-raw$          # Raw data and code used to create data included in the package

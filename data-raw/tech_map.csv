@@ -1,0 +1,45 @@
+raw,agg1,agg2
+battery_li,battery,storage
+beccs_mod,beccs,biopower
+biopower,biopower,biopower
+can-imports,imports,other
+coal-ccs_mod,coal-ccs,coal
+coal-igcc,coal,coal
+coal-new,coal,coal
+coal-new_coal-ccs,coal-ccs,coal
+coaloldscr,coal,coal
+coaloldscr_coal-ccs,coal-ccs,coal
+coalolduns,coal,coal
+coalolduns_coal-ccs,coal-ccs,coal
+csp-ns,csp,solar
+distpv,distpv,solar
+egs_allkm,geothermal,geothermal
+egs_nearfield,geothermal,geothermal
+electrolyzer,electrolyzer,h2-prod
+gas-cc,gas-cc,natural gas
+gas-cc_gas-cc-ccs,gas-cc-ccs,natural gas
+gas-cc_h2-cc,h2-cc,other
+gas-cc-ccs,gas-cc-ccs,natural gas
+gas-ct,gas-ct,natural gas
+gas-ct_aero,gas-ct,natural gas
+gas-ct_h2-ct,h2-ct,other
+geohydro_allkm,geothermal,geothermal
+h2-cc,h2-cc,other
+h2-ct,h2-ct,other
+hyded,hydro,hydro
+hydend,hydro,hydro
+hydnd,hydro,hydro
+hydnpnd,hydro,hydro
+hydsnd,hydro,hydro
+hydud,hydro,hydro
+hydund,hydro,hydro
+lfill-gas,lfill-gas,other
+nuclear,nuclear,nuclear
+nuclear-smr,nuclear,nuclear
+o-g-s,o-g-s,other
+pumped-hydro,pumped-hydro,storage
+smr,smr,h2-prod
+smr-ccs,smr-ccs,h2-prod
+upv,upv,solar
+wind-ofs,wind-ofs,wind
+wind-ons,wind-ons,wind
