@@ -4,12 +4,14 @@
 \alias{check_cols}
 \title{Check if required columns are present}
 \usage{
-check_cols(df, cols)
+check_cols(df, cols, fail = T)
 }
 \arguments{
 \item{df}{dataframe or datatable object}
 
 \item{cols}{vector of column names to check}
+
+\item{stop}{boolean to stop the script if check fails}
 }
 \description{
 Check if required columns are present

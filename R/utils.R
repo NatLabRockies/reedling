@@ -11,11 +11,21 @@ check_dir_exists <- function(path){
 #' Check if required columns are present
 #' @param df dataframe or datatable object
 #' @param cols vector of column names to check
-check_cols <- function(df, cols){
+#' @param stop boolean to stop the script if check fails
+check_cols <- function(df, cols, fail=T){
   matched_cols <- intersect(colnames(df), cols)
   missing_cols <- cols[!(cols %in% matched_cols)]
   if(length(missing_cols)>0){
-    stop(paste("The following columns are required: ", paste(missing_cols, sep=",")))
+    df_name <- deparse(substitute(df))
+    error <- paste0("The following columns are required in ", df_name, ": ", paste(missing_cols, sep=","))
+    if(fail){
+      stop(error)
+    } else {
+      print(error)
+      return(FALSE)
+    }
+  } else {
+    return(TRUE)
   }
 }
 
