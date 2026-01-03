@@ -169,11 +169,11 @@ format_techs <- function(df, tech_col="i", mapping=NULL, col_from="raw", col_to=
     # set ordering file
     if (is.null(tech_order)){
       cat("defaulting to 'tech_colors' for tech order", sep="\n")
-      tech_order <- rev(names(tech_colors))
+      tech_order <- names(tech_colors)
     } else {
       cat("using custom tech_order", sep="\n")
       if(is.vector(order_techs) & !is.null(names(order_techs))){
-        tech_order <- rev(names(tech_colors))
+        tech_order <- names(tech_colors)
       } 
     }
     # apply ordering
