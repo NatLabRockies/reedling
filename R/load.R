@@ -120,8 +120,7 @@ load_meta <- function(runs, summarize=FALSE, skip_lines=3){
 
         # skip one more line if needed
         if (colnames(df)[1] == "#") {
-          colnames(df) <- as.character(unlist(df[1,]))
-          df <- df[-1, ]
+          df <- data.table::fread(file.path(path_name, "meta.csv"), skip=skip_lines+1)
         }
 
         df$run <- run_name
