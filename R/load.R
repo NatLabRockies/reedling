@@ -117,6 +117,13 @@ load_meta <- function(runs, summarize=FALSE, skip_lines=3){
       {
         # read in meta.csv, skipping comments at top
         df <- data.table::fread(file.path(path_name, "meta.csv"), skip=skip_lines)
+
+        # skip one more line if needed
+        if (colnames(meta)[1] == "#") {
+          colnames(meta) <- as.character(unlist(meta[1,]))
+          meta <- meta[-1, ]
+        }
+        
         df$run <- run_name
         # enforce date columns as POSIXct; this helps avoid
         # issues when combining meta files later
