@@ -333,6 +333,11 @@ format_transmission <- function(df, reedspath, routetype="transmission_endpoints
   # get X and Y coordinates for linestrings
   tx_endpoints <- data.frame(r=as.character(tx_shp$ba_str), X=st_coordinates(tx_shp)[,"X"], Y=st_coordinates(tx_shp)[,"Y"])
 
+  # map to default 132 aggregation
+  hierarchy <- fread(file.path(reedspath, "inputs", "hierarchy.csv"))
+  tx_shp$ba_str <- mapvalues(tx_shp$ba_str, from=hierarchy$ba, to=hierarchy$aggreg, warn_missing=F)
+  tx_shp <- tx_shp[!duplicated(tx_shp$ba_str),]
+
   check_cols(df, c("r_from", "r_to"))
   df <- merge(df, tx_endpoints, all.x=T, by.x="r_from", by.y="r")
   colnames(df)[colnames(df) %in% c("X", "Y")] <- c("X_from", "Y_from")
