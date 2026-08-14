@@ -2,3 +2,8 @@
 ^\.Rproj\.user$     # Used by RStudio for temporary files
 ^LICENSE\.md$       # Full text of the license
 ^data-raw$          # Raw data and code used to create data included in the package
+^doc$
+^Meta$
+^_pkgdown\.yml$
+^docs$
+^\.github$

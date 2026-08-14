@@ -16,6 +16,13 @@ Imports:
   stringr     (>= 1.5.0),
   sf          (>= 1.0-5),
   rhdf5       (>= 2.46.1)
+Suggests:
+    knitr,
+    rmarkdown,
+    ggplot2,
+    ggthemes,
+    pkgdown
+VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
 LazyData: true

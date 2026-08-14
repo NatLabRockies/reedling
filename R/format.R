@@ -1,4 +1,6 @@
-## format.R ####
+##############################################
+## Format ReEDS data for plotting
+##############################################
 
 #' Set default ggplot settings for tech plots
 #'
@@ -11,7 +13,7 @@
 set_tech_plot_default <- function() {
   ggplot2::theme_set(ggplot2::theme_bw())
   ggplot2::theme_update(text=ggplot2::element_text(size=8),
-                legend.key.size = ggplot2::unit(1, 'mm'),       #change legend key size
+                legend.key.size = ggplot2::unit(1, 'mm'),      #change legend key size
                 legend.key.height = ggplot2::unit(1, 'mm'),    #change legend key height
                 legend.key.width = ggplot2::unit(2, 'mm'),     #change legend key width
                 legend.title = ggplot2::element_blank(),       #change legend title font size
@@ -260,14 +262,6 @@ inflate_cost_data <- function(runs, cost_df, year_from=2004, year_to=NULL,
   cost_df$inflator <- NULL
 
   return(cost_df)
-}
-
-#' @export
-map_rs_to_r <- function(df, path) {
-  rsmap <- read.csv(file.path(path, "rsmap.csv"),
-                        col.names = c("r", "rs"), stringsAsFactors = F)
-  df$r <- plyr::mapvalues(df$r, from=rsmap$rs, to=rsmap$r, warn_missing = F)
-  return(df)
 }
 
 #' @export
