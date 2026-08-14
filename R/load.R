@@ -238,15 +238,9 @@ load_run_data <- function(runs, filename, folder="outputs", header=T) {
         df_all <- append(df_all, list(df))
       }
     }
-    # check for output information from e_report_params
-    if(folder == "outputs" & file.exists(file.path(run_folder, "e_report_params.csv"))){
-      e_report_params <- read.csv(file.path(run_folder, "e_report_params.csv"), comment.char = "#")
-      e_report_params$filename <- gsub("\\(.*?\\)", "", e_report_params$param)
-      e_report_params$filename <- ifelse(e_report_params$output_rename=="",
-                                         e_report_params$filename,
-                                         e_report_params$output_rename)
-      file_units <- e_report_params[e_report_params$filename==gsub(".csv", "", filename), "units"]
-      newcolname <- paste(gsub(".csv", "", filename), file_units, sep="_")
+    # check for output information from report_params
+    if(folder == "outputs"){
+      newcolname <- get_output_param_units(run_folder, gsub(".csv", "", filename))
       newcolname_all <- c(newcolname_all, newcolname)
     }
   }
@@ -260,20 +254,7 @@ load_run_data <- function(runs, filename, folder="outputs", header=T) {
 
   # specific formatting for output columns
   if(folder == "outputs"){
-    # get output column
-    valcolname <- colnames(df_out)[grepl("Val", colnames(df_out))]
-    # check that all runs have e_report_params.csv file
-    if(length(newcolname_all) != nrow(runs)){
-      cat("Caution: not all runs have 'e_report_params.csv'. Will skip renaming 'Val' column.")
-    } else if (length(unique(newcolname_all)) > 1) {
-      cat(sprintf("Caution: multiple column names detected from 'e_report_params.csv' across runs: %s.
-                  Will skip renaming 'Val' column.", paste(unique(newcolname_all), collapse=", ")))
-    } else {
-      # rename if new name is supplied
-      cat(sprintf("Updated column name: %s --> %s", valcolname, unique(newcolname_all)), sep="\n")
-      colnames(df_out)[colnames(df_out) == valcolname] <- unique(newcolname_all)
-      valcolname <- unique(newcolname_all)
-    }
+    df_out <- rename_val_column(df_out, newcolname_all, nrow(runs))
   }
   # report elapsed time
   elapsed <- proc.time() - tic
@@ -333,14 +314,8 @@ load_h5_data <- function(runs, resultname, folder="outputs"){
     }
 
     # check for output information from e_report_params
-    if(folder == "outputs" & file.exists(file.path(run_folder, "e_report_params.csv"))){
-      e_report_params <- read.csv(file.path(run_folder, "e_report_params.csv"), comment.char = "#")
-      e_report_params$filename <- gsub("\\(.*?\\)", "", e_report_params$param)
-      e_report_params$filename <- ifelse(e_report_params$output_rename=="",
-                                         e_report_params$filename,
-                                         e_report_params$output_rename)
-      file_units <- e_report_params[e_report_params$filename==gsub(".csv", "", resultname), "units"]
-      newcolname <- paste(gsub(".csv", "", resultname), file_units, sep="_")
+    if(folder == "outputs"){
+      newcolname <- get_output_param_units(run_folder, resultname)
       newcolname_all <- c(newcolname_all, newcolname)
     }
   }
@@ -354,20 +329,7 @@ load_h5_data <- function(runs, resultname, folder="outputs"){
 
   # specific formatting for output columns
   if(folder == "outputs"){
-    # get output column
-    valcolname <- colnames(df_out)[grepl("Val", colnames(df_out))]
-    # check that all runs have e_report_params.csv file
-    if(length(newcolname_all) != nrow(runs)){
-      cat("Caution: not all runs have 'e_report_params.csv'. Will skip renaming 'Val' column.")
-    } else if (length(unique(newcolname_all)) > 1) {
-      cat(sprintf("Caution: multiple column names detected from 'e_report_params.csv' across runs: %s.
-                    Will skip renaming 'Val' column.", paste(unique(newcolname_all), collapse=", ")))
-    } else {
-      # rename if new name is supplied
-      cat(sprintf("Updated column name: %s --> %s", valcolname, unique(newcolname_all)), sep="\n")
-      colnames(df_out)[colnames(df_out) == valcolname] <- unique(newcolname_all)
-      valcolname <- unique(newcolname_all)
-    }
+    df_out <- rename_val_column(df_out, newcolname_all, nrow(runs))
   }
   # report elapsed time
   elapsed <- proc.time() - tic
