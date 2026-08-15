@@ -39,7 +39,6 @@ load_reeds_file <- function(path, run_name, header){
       df <- data.table::fread(path, header=header)
       cat(paste("Loaded", basename(path), "for", run_name), sep="\n")
       df$run <- run_name
-      df$filename <- filename
       return(df)
     },
     error=function(cond)
