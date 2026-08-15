@@ -1,0 +1,42 @@
+# Package index
+
+## All functions
+
+- [`check_cols()`](https://NatLabRockies.github.io/reedling/reference/check_cols.md)
+  : Check if required columns are present
+- [`check_dir_exists()`](https://NatLabRockies.github.io/reedling/reference/check_dir_exists.md)
+  : Check if a path is valid
+- [`format_techs()`](https://NatLabRockies.github.io/reedling/reference/format_techs.md)
+  : Format techs
+- [`inflate_cost_data()`](https://NatLabRockies.github.io/reedling/reference/inflate_cost_data.md)
+  : Inflate cost data
+- [`list_bokeh_fields()`](https://NatLabRockies.github.io/reedling/reference/list_bokeh_fields.md)
+  : List bokeh report fields
+- [`list_bokeh_reports()`](https://NatLabRockies.github.io/reedling/reference/list_bokeh_reports.md)
+  : List bokeh reports
+- [`list_outputs()`](https://NatLabRockies.github.io/reedling/reference/list_outputs.md)
+  : List output files
+- [`list_runs()`](https://NatLabRockies.github.io/reedling/reference/list_runs.md)
+  : List ReEDS runs
+- [`load_bokeh_data()`](https://NatLabRockies.github.io/reedling/reference/load_bokeh_data.md)
+  : Load outputs from bokeh reports
+- [`load_h5_data()`](https://NatLabRockies.github.io/reedling/reference/load_h5_data.md)
+  : Load data from outputs.h5 from ReEDS runs
+- [`load_meta()`](https://NatLabRockies.github.io/reedling/reference/load_meta.md)
+  : Load run metadata
+- [`load_reeds_file()`](https://NatLabRockies.github.io/reedling/reference/load_reeds_file.md)
+  : Load a ReEDS run file
+- [`load_run_data()`](https://NatLabRockies.github.io/reedling/reference/load_run_data.md)
+  : Load outputs from ReEDS runs
+- [`run_summary()`](https://NatLabRockies.github.io/reedling/reference/run_summary.md)
+  : Summarize ReEDS runs
+- [`set_tech_map()`](https://NatLabRockies.github.io/reedling/reference/set_tech_map.md)
+  : Set tech map
+- [`set_tech_plot_default()`](https://NatLabRockies.github.io/reedling/reference/set_tech_plot_default.md)
+  : Set default ggplot settings for tech plots
+- [`set_tech_style()`](https://NatLabRockies.github.io/reedling/reference/set_tech_style.md)
+  : Set tech style
+- [`tech_colors`](https://NatLabRockies.github.io/reedling/reference/tech_colors.md)
+  : ReEDS technology colors
+- [`tech_map`](https://NatLabRockies.github.io/reedling/reference/tech_map.md)
+  : ReEDS technology map
