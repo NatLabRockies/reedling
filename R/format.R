@@ -368,7 +368,7 @@ format_transmission <- function(df, reedspath, routetype="transmission_endpoints
 
 #' @export
 #' @import data.table
-#' @import lubridate
+#' @importFrom lubridate force_tz month
 format_timeseries <- function(runs, df, hmap_file="hmap_myr.csv", hmap=NULL){
   # first load hmapping for the runs
   if(is.null(hmap)){
