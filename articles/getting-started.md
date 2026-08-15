@@ -8,30 +8,8 @@ run data, formatting technology categories, and creating common plots.
 ``` r
 
 library(reedling)
-#> Warning: replacing previous import 'data.table::wday' by 'lubridate::wday' when
-#> loading 'reedling'
-#> Warning: replacing previous import 'data.table::second' by 'lubridate::second'
-#> when loading 'reedling'
-#> Warning: replacing previous import 'data.table::isoweek' by
-#> 'lubridate::isoweek' when loading 'reedling'
-#> Warning: replacing previous import 'data.table::yday' by 'lubridate::yday' when
-#> loading 'reedling'
-#> Warning: replacing previous import 'data.table::hour' by 'lubridate::hour' when
-#> loading 'reedling'
-#> Warning: replacing previous import 'data.table::year' by 'lubridate::year' when
-#> loading 'reedling'
 #> Warning: replacing previous import 'data.table::month' by 'lubridate::month'
 #> when loading 'reedling'
-#> Warning: replacing previous import 'data.table::week' by 'lubridate::week' when
-#> loading 'reedling'
-#> Warning: replacing previous import 'data.table::isoyear' by
-#> 'lubridate::isoyear' when loading 'reedling'
-#> Warning: replacing previous import 'data.table::minute' by 'lubridate::minute'
-#> when loading 'reedling'
-#> Warning: replacing previous import 'data.table::mday' by 'lubridate::mday' when
-#> loading 'reedling'
-#> Warning: replacing previous import 'data.table::quarter' by
-#> 'lubridate::quarter' when loading 'reedling'
 library(data.table)
 library(ggplot2)
 library(ggthemes)
