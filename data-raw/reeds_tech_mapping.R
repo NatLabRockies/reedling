@@ -1,13 +1,14 @@
 library(usethis)
 library(devtools)
+library(here)
 
-setwd("/Users/bsergi/Documents/Tools/reedling/data-raw")
+here::set_here()
 
 ## ReEDS technology mapping
-tech_map <- read.csv("tech_map.csv")
+tech_map <- read.csv(file.path("data-raw", "tech_map.csv"))
 
 ## ReEDS technology colors
-tech_colors_in <- read.csv("tech_colors.csv")
+tech_colors_in <- read.csv(file.path("data-raw", "tech_colors.csv"))
 
 # check for techs in mapping but not in colors
 alltechs <- unique(c(tech_map$agg1, tech_map$agg2))

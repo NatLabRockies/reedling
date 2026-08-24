@@ -22,6 +22,9 @@ electrolyzer,electrolyzer,h2-prod,h2-prod
 gas-cc,gas-cc,gas-cc,natural gas
 gas-cc_gas-cc-ccs,gas-cc-ccs,gas-cc-ccs,natural gas
 gas-cc_h2-cc,h2-cc,h2-cc,other
+gas-cc_hx1,gas-cc,gas-cc,natural gas
+gas-cc_hx1-ccs,gas-cc-ccs,gas-cc-ccs,natural gas
+gas-cc_hx1_gas-cc_hx1-ccs,gas-cc-ccs,gas-cc-ccs,natural gas
 gas-cc-ccs,gas-cc-ccs,gas-cc-ccs,natural gas
 gas-ct,gas-ct,gas-ct,natural gas
 gas-ct_aero,gas-ct,gas-ct,natural gas
