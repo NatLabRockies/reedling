@@ -1,4 +1,6 @@
-## format.R ####
+##############################################
+## Format ReEDS data for plotting
+##############################################
 
 #' Set default ggplot settings for tech plots
 #'
@@ -11,7 +13,7 @@
 set_tech_plot_default <- function() {
   ggplot2::theme_set(ggplot2::theme_bw())
   ggplot2::theme_update(text=ggplot2::element_text(size=8),
-                legend.key.size = ggplot2::unit(1, 'mm'),       #change legend key size
+                legend.key.size = ggplot2::unit(1, 'mm'),      #change legend key size
                 legend.key.height = ggplot2::unit(1, 'mm'),    #change legend key height
                 legend.key.width = ggplot2::unit(2, 'mm'),     #change legend key width
                 legend.title = ggplot2::element_blank(),       #change legend title font size
@@ -107,76 +109,92 @@ set_tech_style <- function(path, filename="tech_style.csv", custom=F){
 #' Format techs
 #'
 #' Recategorizes data by generator techs based on a tech mapping file. Outputs the same data with a new column named `tech` that includes the new mapping.
+#' Note that the mapping function will automatically convert the mapping and target technology values to lower case.
 #'
-#' @param df data table with generator technologies to map in a column specified by `tech_col`
-#' @param mapping data table with mapping of old to new techs (see `set_tech_map`)
-#' @param tech_colors optional named vector of techs with colors in order for plotting; used to set factor levels for new tech (see `set_tech_style`)
+#' @param df data frame or table with generator technologies to map in a column specified by `tech_col`
 #' @param tech_col column from `df` with tech names (default = `i`)
+#' @param mapping data frame or table with mapping of old to new techs; by default uses built in `tech_map`
 #' @param col_from column from `mapping` with old tech names (default = `raw`)
-#' @param col_to column from `mapping` with new tech names (default = `display`)`)
+#' @param col_to column from `mapping` with new tech names (default = `agg1`)`)
+#' @param order_techs whether to set tech order using factor levels (default = `TRUE`)
+#' @param tech_order named vector of techs in order to set for levels
 
 #'
-#' @return Data Table of tech categories
+#' @return data frame or table with 'tech' column added
 #' @import data.table
-#' @import stringr
 #' @import plyr
 #'
 #' @export
-format_techs <- function(df, mapping, tech_colors=NULL, tech_col="i", col_from="raw", col_to="display"){
-  # check for the correct columns
+format_techs <- function(df, tech_col="i", mapping=NULL, col_from="raw", col_to="agg1", order_techs=T, tech_order=NULL){
+  cat("formatting ReEDS techs", sep="\n")
+  # set tech mapping
+  if(is.null(mapping)){
+    cat("defaulting to 'tech_map' for mapping", sep="\n")
+    mapping <- tech_map
+  } else {
+    cat("using custom tech mapping", sep="\n")
+  }
+  # check columns of mapping file
+  mapping_cols <- c("raw", col_to)
+  if(!(check_cols(tech_map, mapping_cols))){
+    stop("Either edit the columns of your tech mapping file or specify new values for 'col_from' or 'col_to'")
+  }
+  # check for the tech_col column in data
   check_cols(df, c(tech_col))
-  if (!col_to %in% colnames(mapping) | !col_from %in% colnames(mapping)){
-    print(paste0("Cannot find column in tech mapping file; specify one of the following columns: ", paste0(colnames(mapping), collapse =", ")))
-    return(NULL)
-  }
-  # if using a different column than i for techs, set to i
-  if (tech_col != "i"){
-    if("i" %in% colnames(df)){
-      colnames(df)[colnames(df) == "i"] <- "i_old"
-    }
-    df$i <- df[[tech_col]]
-  }
-  # for columns with *, replace with .* for matching regular expressions
-  # mapping[, (col_from) := gsub("\\*", ".*", get(col_from))]
-  mapping[, col_from] <- gsub("\\*", ".*", mapping[, col_from])
-  # Sort the mapping by length of the matching pattern in descending order;
-  # this helps make sure that the closest match is applied
-  mapping <- mapping[order(-stringr::str_length(mapping[, col_from])),]
-  # special adjustment for demand response (dr): make sure if only matches
-  # tech when it is at the beginning of the string
-  mapping[, col_from] <- plyr::mapvalues(mapping[, col_from], from="dr.*", to="^dr.*")
-  # map values
-  # TODO: finish updating here
-  #df$tech <- stringr::str_replace_all(tolower(df$i), stats::setNames(as.character(mapping[, col_to]),
-  #                                                                   as.character(mapping[, col_from])))
-  df$tech <- plyr::mapvalues(tolower(df$i), from=mapping[, col_from], to=mapping[, col_to])
 
+  # drop resource class and mod/max suffix
+  df$tech <- tolower(df[[tech_col]])
+  df$tech <- gsub("[0-9]{0,1}_(([0-9]{1,2})|mod|max)", "", df$tech)
+  
   # check for unmapped technologies
-  missing_techs <- unique(df$i[is.na(df$tech)])
+  target_techs <- unique(df$tech)
+  missing_techs <-  target_techs[!(target_techs %in% tolower(mapping[[col_from]]))]
   if (length(missing_techs) > 1){
-    print(paste("The following technologies were unmapped:", paste(missing_techs, collapse = ", ")))
+    cat(paste("The following technologies are missing from the mapping:", paste(missing_techs, collapse = ", ")), sep="\n")
   }
-  df_mapped <- df[,by=.(i,tech), .(obs=length(i))]
+
+  # map values
+  df$tech <- plyr::mapvalues(tolower(df$tech), from=tolower(mapping[[col_from]]), to=mapping[[col_to]], warn_missing=F)
+
+  # display mapping
+  df_mapped <- df[,by=.(get(tech_col),tech), .(obs=length(get(tech_col)))]
+  setnames(df_mapped, "get", tech_col)
   cat("Mapped the following technologies:\n\n")
-  df_mapped <- df_mapped[order(df_mapped$i)]
-  print(sprintf("%-25s --> %s", df_mapped$i, df_mapped$tech))
+  df_mapped <- df_mapped[order(df_mapped[[tech_col]])]
+  for(i in 1:nrow(df_mapped)){
+    cat(sprintf("%-5s %-25s --> %s\n", paste0("[",i,"]"), df_mapped[[tech_col]][i], df_mapped$tech[i]))
+  }
+
   # apply levels for tech_colors if specified
-  if (!is.null(tech_colors)){
-    cat("Formatting tech levels\n\n")
-    missing_levels <- unique(df$tech)[!unique(df$tech) %in% names(tech_colors)]
-    duplicated_levels <- tech_colors[duplicated(names(tech_colors))]
-    if ( length(missing_levels) > 0 ){
-      print("Missing the following techs from colors:")
-      print(missing_levels)
-      print("Techs mapped but levels not set")
-    } else if (length(duplicated_levels) > 0) {
-      print("The following techs are duplicated in color mapping:")
-      print(duplicated_levels)
-      print("Techs mapped but levels not set")
+  if(order_techs){
+      cat("\nFormatting tech levels\n")
+    # set ordering file
+    if (is.null(tech_order)){
+      cat("defaulting to 'tech_colors' for tech order", sep="\n")
+      tech_order <- names(tech_colors)
     } else {
-      df$tech <- factor(df$tech, levels=rev(names(tech_colors)))
+      cat("using custom tech_order", sep="\n")
+      if(is.vector(order_techs) & !is.null(names(order_techs))){
+        tech_order <- names(tech_colors)
+      } 
+    }
+    # apply ordering
+    missing_levels <- unique(df$tech)[!(unique(df$tech) %in% tech_order)]
+    duplicated_levels <- tech_colors[duplicated(tech_order)]
+    if ( length(missing_levels) > 0 ){
+      cat("Missing the following techs from tech_order: ")
+      cat(missing_levels)
+      cat("\nTechs mapped but levels not set", sep="\n")
+    } else if (length(duplicated_levels) > 0) {
+      cat("The following techs are duplicated in color mapping:")
+      cat(duplicated_levels)
+      cat("\nTechs mapped but levels not set", sep="\n")
+    } else {
+      df$tech <- factor(df$tech, levels=tech_order)
+      cat("Techs levels set", sep="\n")
     }
   }
+  # return formatted data
   return(df)
 }
 
@@ -247,14 +265,6 @@ inflate_cost_data <- function(runs, cost_df, year_from=2004, year_to=NULL,
 }
 
 #' @export
-map_rs_to_r <- function(df, path) {
-  rsmap <- read.csv(file.path(path, "rsmap.csv"),
-                        col.names = c("r", "rs"), stringsAsFactors = F)
-  df$r <- plyr::mapvalues(df$r, from=rsmap$rs, to=rsmap$r, warn_missing = F)
-  return(df)
-}
-
-#' @export
 categorize_scenarios <- function(runs, scenmapping){
   scenmapping <- data.frame(lapply(scenmapping, as.character), stringsAsFactors=FALSE)
   # add new scenario columns
@@ -314,9 +324,13 @@ calc_difference <- function(df, widecol, valcol, baseval, compval, excludecol=NU
 format_transmission <- function(df, reedspath, routetype="transmission_endpoints"){
   # load shapefile with transmission endpoints
   tx_shp <- load_tx_shapefile(reedspath, routetype)
+  # map to default 132 aggregation
+  hierarchy <- fread(file.path(reedspath, "inputs", "hierarchy.csv"))
+  tx_shp$ba_str <- mapvalues(tx_shp$ba_str, from=hierarchy$ba, to=hierarchy$aggreg, warn_missing=F)
+  tx_shp <- tx_shp[!duplicated(tx_shp$ba_str),]
+
   # get X and Y coordinates for linestrings
   tx_endpoints <- data.frame(r=as.character(tx_shp$ba_str), X=st_coordinates(tx_shp)[,"X"], Y=st_coordinates(tx_shp)[,"Y"])
-
   check_cols(df, c("r_from", "r_to"))
   df <- merge(df, tx_endpoints, all.x=T, by.x="r_from", by.y="r")
   colnames(df)[colnames(df) %in% c("X", "Y")] <- c("X_from", "Y_from")
@@ -354,7 +368,7 @@ format_transmission <- function(df, reedspath, routetype="transmission_endpoints
 
 #' @export
 #' @import data.table
-#' @import lubridate
+#' @importFrom lubridate force_tz month
 format_timeseries <- function(runs, df, hmap_file="hmap_myr.csv", hmap=NULL){
   # first load hmapping for the runs
   if(is.null(hmap)){

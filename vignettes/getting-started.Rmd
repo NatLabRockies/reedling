@@ -1,0 +1,130 @@
+---
+title: "Getting Started with reedling"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with reedling}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+This vignette walks through the core reedling workflow: loading ReEDS run data,
+formatting technology categories, and creating common plots.
+
+## Setup
+
+```{r libraries, message = FALSE}
+library(reedling)
+library(data.table)
+library(ggplot2)
+library(ggthemes)
+```
+
+## Loading runs
+
+Use `run_summary()` to scan a directory of ReEDS runs. Here we point to the
+example runs bundled with the package:
+
+```{r load-runs}
+runspath <- system.file("extdata", "runs", package = "reedling")
+runs <- run_summary(runspath, "20260810")
+runs
+```
+
+## Installed capacity
+
+Load capacity data from `outputs.h5` and apply standard technology formatting:
+
+```{r cap}
+cap <- load_h5_data(runs, "cap")
+cap <- format_techs(cap)
+```
+
+Plot installed capacity by technology and run:
+
+```{r cap-plot, fig.width = 8, fig.height = 5}
+cap_agg <- cap[, by = .(run, t, tech), .(cap_MW = sum(cap_MW))]
+
+ggplot(cap_agg[t >= 2025], aes(x = factor(t), y = cap_MW / 1e3, fill = tech)) +
+  geom_col() +
+  facet_wrap(~run, nrow = 1) +
+  scale_x_discrete("") +
+  scale_y_continuous("Installed capacity [GW]",
+    expand = expansion(mult = c(0, 0.05))) +
+  scale_fill_manual(values = tech_colors) +
+  guides(fill = guide_legend(ncol = 1))
+```
+
+## Annual generation
+
+Load annual generation data with a different technology aggregation:
+
+```{r gen}
+gen_ann <- load_h5_data(runs, "gen_ann")
+gen_ann <- format_techs(gen_ann, col_to = "agg3")
+```
+
+## Transmission capacity
+
+Load transmission data and plot total capacity over time:
+
+```{r transmission}
+tran_mi_out <- load_h5_data(runs, "tran_mi_out")
+tran_mi_out$trtype <- factor(tran_mi_out$trtype, levels = c("LCC", "B2B", "AC"))
+tran_mi_out_total <- tran_mi_out[, by = .(run, t),
+  .(`tran_mi_out_MW-mi` = sum(`tran_mi_out_MW-mi`))]
+```
+
+```{r transmission-plot}
+ggplot(tran_mi_out_total[t >= 2025],
+  aes(x = t, y = `tran_mi_out_MW-mi` / 1e6, color = run)) +
+  geom_line() +
+  scale_y_continuous("Transmission capacity [TW-mi]",
+    expand = expansion(mult = c(0, 0.05)), limits = c(0, NA)) +
+  scale_x_continuous("", expand = expansion(mult = c(0, 0.1)))
+```
+
+## Bokeh report data
+
+You can also load data from bokeh report Excel files. First, preview available
+fields:
+
+```{r bokeh-fields}
+list_bokeh_fields(runs)
+```
+
+Then load a specific result, such as system cost:
+
+```{r npv}
+npv <- load_bokeh_data(runs, "29_Present Value of System Cost")
+npv_net <- npv[, by = .(run), .(net = sum(`Discounted Cost (Bil $)`))]
+```
+
+```{r npv-plot, fig.width = 8, fig.height = 5}
+ggplot(npv, aes(x = run)) +
+  geom_col(mapping = aes(y = `Discounted Cost (Bil $)`, fill = cost_cat)) +
+  geom_point(data = npv_net, mapping = aes(y = net)) +
+  geom_label(data = npv_net, mapping = aes(y = net, label = round(net)),
+    vjust = -0.5, size = 2.5) +
+  geom_hline(yintercept = 0) +
+  scale_x_discrete("") +
+  scale_fill_tableau(palette = "Tableau 20")
+```
+
+## Loading CSV outputs
+
+In addition to `outputs.h5`, you can load individual CSV files with
+`load_run_data()`:
+
+```{r csv}
+cap_csv <- load_run_data(runs, "cap.csv")
+hierarchy <- load_run_data(runs, "hierarchy.csv", folder = "inputs_case")
+```

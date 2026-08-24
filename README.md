@@ -18,7 +18,7 @@ Note the other package requirements in the `NAMESPACE` file.
 
 ## User guide
 
-Under development -- check back later!
+See the [Getting Started](https://NatLabRockies.github.io/reedling/articles/getting-started.html) vignette for a walkthrough with example data and plots.
 
 <!-- reedling picture -->
 <p align="center">

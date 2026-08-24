@@ -6,29 +6,33 @@
 \usage{
 format_techs(
   df,
-  mapping,
-  tech_colors = NULL,
   tech_col = "i",
+  mapping = NULL,
   col_from = "raw",
-  col_to = "display"
+  col_to = "agg1",
+  order_techs = T,
+  tech_order = NULL
 )
 }
 \arguments{
-\item{df}{data table with generator technologies to map in a column specified by \code{tech_col}}
-
-\item{mapping}{data table with mapping of old to new techs (see \code{set_tech_map})}
-
-\item{tech_colors}{optional named vector of techs with colors in order for plotting; used to set factor levels for new tech (see \code{set_tech_style})}
+\item{df}{data frame or table with generator technologies to map in a column specified by \code{tech_col}}
 
 \item{tech_col}{column from \code{df} with tech names (default = \code{i})}
 
+\item{mapping}{data frame or table with mapping of old to new techs; by default uses built in \code{tech_map}}
+
 \item{col_from}{column from \code{mapping} with old tech names (default = \code{raw})}
 
-\item{col_to}{column from \code{mapping} with new tech names (default = \code{display})`)}
+\item{col_to}{column from \code{mapping} with new tech names (default = \code{agg1})`)}
+
+\item{order_techs}{whether to set tech order using factor levels (default = \code{TRUE})}
+
+\item{tech_order}{named vector of techs in order to set for levels}
 }
 \value{
-Data Table of tech categories
+data frame or table with 'tech' column added
 }
 \description{
 Recategorizes data by generator techs based on a tech mapping file. Outputs the same data with a new column named \code{tech} that includes the new mapping.
+Note that the mapping function will automatically convert the mapping and target technology values to lower case.
 }
