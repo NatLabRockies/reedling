@@ -32,6 +32,7 @@ gas-ct_h2-ct,h2-ct,h2-ct,other
 geohydro_allkm,geothermal,geothermal,geothermal
 h2-cc,h2-cc,h2-cc,other
 h2-ct,h2-ct,h2-ct,other
+h2-fuel-cell,h2-fuel-cell,h2-fuel-cell,other
 hyded,hydro,hydro,hydro
 hydend,hydro,hydro,hydro
 hydnd,hydro,hydro,hydro
@@ -40,6 +41,7 @@ hydsnd,hydro,hydro,hydro
 hydud,hydro,hydro,hydro
 hydund,hydro,hydro,hydro
 lfill-gas,lfill-gas,other,other
+ng-fuel-cell,gas-fuel-cell,gas-fuel-cell,natural gas
 nuclear,nuclear,nuclear,nuclear
 nuclear-smr,nuclear,nuclear,nuclear
 o-g-s,o-g-s,o-g-s,other
