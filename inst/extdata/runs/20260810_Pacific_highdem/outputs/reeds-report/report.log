@@ -1,0 +1,1165 @@
+2026-08-10 11:44:02,226 - ***Building report section: Error Check...
+2026-08-10 11:44:02,226 - ***Fetching Error Check for selected scenarios...
+2026-08-10 11:44:02,229 - ***Done fetching Error Check for 20260810_Pacific_highdem.
+2026-08-10 11:44:02,230 - ***Done fetching Error Check: 0:00:00.003450
+2026-08-10 11:44:02,230 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:02,230 - ***Done with joins, maps, ordering: 0:00:00.000797
+2026-08-10 11:44:02,231 - ***Build main widgets...
+2026-08-10 11:44:02,251 - ***Done with main widgets.
+2026-08-10 11:44:02,252 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:02,256 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.003708
+2026-08-10 11:44:02,256 - ***Building Figures...
+2026-08-10 11:44:02,273 - ***Done Building Figures.
+
+2026-08-10 11:44:02,280 - ***Building report section: Intertemporal Capacity by Iteration (GW)...
+2026-08-10 11:44:02,280 - ***Fetching Capacity Iteration (GW) for selected scenarios...
+2026-08-10 11:44:02,285 - ***Error in section 2...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/reeds/io.py", line 505, in read_output
+    df = read_h5(h5path, key)
+  File "/Users/bsergi/Documents/github/ReEDS/reeds/io.py", line 425, in read_h5
+    columns = [i.decode() for i in list(f[key]['columns'])]
+                                        ~^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/h5py/_hl/group.py", line 407, in __getitem__
+    return self._get(name)
+           ~~~~~~~~~^^^^^^
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/h5py/_hl/group.py", line 421, in _get
+    oid = h5o.open(self.id, self._e(name), lapl=lapl)
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5o.pyx", line 255, in h5py.h5o.open
+KeyError: "Unable to synchronously open object (object 'cap_iter' doesn't exist)"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 638, in preset_wdg
+    GL['widgets'][key].value = preset[key]
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 541, in update_reeds_result
+    update_reeds_wdg(wdg_type='result')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 603, in update_reeds_wdg
+    get_reeds_data(core.GL['variant_wdg'], GL_REEDS['scenarios'], GL_REEDS['result_dfs'])
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 309, in get_reeds_data
+    df_scen_result = get_src(scenarios[i], result_meta)
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 362, in get_src
+    df_src = read_output(scen['path'], filepath)
+  File "/Users/bsergi/Documents/github/ReEDS/reeds/io.py", line 517, in read_output
+    raise KeyError(f"{filename} is not in {h5path}")
+KeyError: '/Users/bsergi/Documents/github/ReEDS/runs/20260810_Pacific_highdem/outputs/cap_iter is not in /Users/bsergi/Documents/github/ReEDS/runs/20260810_Pacific_highdem/outputs/outputs.h5'
+
+2026-08-10 11:44:02,286 - ***Building report section: Generation (TWh)...
+2026-08-10 11:44:02,286 - ***Fetching Generation National (TWh) for selected scenarios...
+2026-08-10 11:44:02,288 - ***Done fetching Generation National (TWh) for 20260810_Pacific_highdem.
+2026-08-10 11:44:02,291 - ***Done fetching Generation National (TWh): 0:00:00.004709
+2026-08-10 11:44:02,291 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:02,318 - ***Done with joins, maps, ordering: 0:00:00.027085
+2026-08-10 11:44:02,319 - ***Build main widgets...
+2026-08-10 11:44:02,342 - ***Done with main widgets.
+2026-08-10 11:44:02,343 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:02,360 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.016518
+2026-08-10 11:44:02,360 - ***Building Figures...
+2026-08-10 11:44:02,405 - ***Done Building Figures.
+
+2026-08-10 11:44:02,420 - ***Building report section: Capacity (GW)...
+2026-08-10 11:44:02,420 - ***Fetching Capacity National (GW) for selected scenarios...
+2026-08-10 11:44:02,422 - ***Done fetching Capacity National (GW) for 20260810_Pacific_highdem.
+2026-08-10 11:44:02,424 - ***Done fetching Capacity National (GW): 0:00:00.004031
+2026-08-10 11:44:02,424 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:02,450 - ***Done with joins, maps, ordering: 0:00:00.025625
+2026-08-10 11:44:02,450 - ***Build main widgets...
+2026-08-10 11:44:02,470 - ***Done with main widgets.
+2026-08-10 11:44:02,472 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:02,486 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.013788
+2026-08-10 11:44:02,486 - ***Building Figures...
+2026-08-10 11:44:02,531 - ***Done Building Figures.
+
+2026-08-10 11:44:02,546 - ***Building report section: Energy Capacity (GWh)...
+2026-08-10 11:44:02,547 - ***Fetching Energy Capacity ivrt (GWh) for selected scenarios...
+2026-08-10 11:44:02,551 - ***Done fetching Energy Capacity ivrt (GWh) for 20260810_Pacific_highdem.
+2026-08-10 11:44:02,551 - ***Done fetching Energy Capacity ivrt (GWh): 0:00:00.004026
+2026-08-10 11:44:02,551 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:02,576 - ***Done with joins, maps, ordering: 0:00:00.025511
+2026-08-10 11:44:02,577 - ***Build main widgets...
+2026-08-10 11:44:02,603 - ***Done with main widgets.
+2026-08-10 11:44:02,605 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:02,611 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.006087
+2026-08-10 11:44:02,611 - ***Building Figures...
+2026-08-10 11:44:02,624 - ***Done Building Figures.
+
+2026-08-10 11:44:02,629 - ***Building report section: New Annual Capacity (GW)...
+2026-08-10 11:44:02,629 - ***Fetching New Annual Capacity National (GW) for selected scenarios...
+2026-08-10 11:44:02,631 - ***Done fetching New Annual Capacity National (GW) for 20260810_Pacific_highdem.
+2026-08-10 11:44:02,633 - ***Done fetching New Annual Capacity National (GW): 0:00:00.004014
+2026-08-10 11:44:02,633 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:02,660 - ***Done with joins, maps, ordering: 0:00:00.026871
+2026-08-10 11:44:02,661 - ***Build main widgets...
+2026-08-10 11:44:02,686 - ***Done with main widgets.
+2026-08-10 11:44:02,687 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:02,699 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.012192
+2026-08-10 11:44:02,700 - ***Building Figures...
+2026-08-10 11:44:02,737 - ***Done Building Figures.
+
+2026-08-10 11:44:02,772 - ***Building report section: Annual Retirements (GW)...
+2026-08-10 11:44:02,772 - ***Fetching Annual Retirements National (GW) for selected scenarios...
+2026-08-10 11:44:02,775 - ***Done fetching Annual Retirements National (GW) for 20260810_Pacific_highdem.
+2026-08-10 11:44:02,777 - ***Done fetching Annual Retirements National (GW): 0:00:00.004378
+2026-08-10 11:44:02,777 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:02,801 - ***Done with joins, maps, ordering: 0:00:00.024403
+2026-08-10 11:44:02,802 - ***Build main widgets...
+2026-08-10 11:44:02,822 - ***Done with main widgets.
+2026-08-10 11:44:02,824 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:02,851 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.026949
+2026-08-10 11:44:02,851 - ***Building Figures...
+2026-08-10 11:44:02,948 - ***Done Building Figures.
+
+2026-08-10 11:44:02,958 - ***Building report section: Final Gen by timeslice (GW)...
+2026-08-10 11:44:02,958 - ***Fetching Gen by timeslice national (GW) for selected scenarios...
+2026-08-10 11:44:02,972 - ***Done fetching Gen by timeslice national (GW) for 20260810_Pacific_highdem.
+2026-08-10 11:44:02,972 - ***Done fetching Gen by timeslice national (GW): 0:00:00.013984
+2026-08-10 11:44:02,972 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:03,083 - ***Done with joins, maps, ordering: 0:00:00.110328
+2026-08-10 11:44:03,083 - ***Build main widgets...
+2026-08-10 11:44:03,107 - ***Done with main widgets.
+2026-08-10 11:44:03,108 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:03,170 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.061485
+2026-08-10 11:44:03,170 - ***Building Figures...
+2026-08-10 11:44:03,216 - ***Done Building Figures.
+
+2026-08-10 11:44:03,239 - ***Building report section: Final Gen by stress timeslice (GW)...
+2026-08-10 11:44:03,239 - ***Fetching Gen by stress timeslice national (GW) for selected scenarios...
+2026-08-10 11:44:03,248 - ***Done fetching Gen by stress timeslice national (GW) for 20260810_Pacific_highdem.
+2026-08-10 11:44:03,248 - ***Done fetching Gen by stress timeslice national (GW): 0:00:00.009308
+2026-08-10 11:44:03,248 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:03,320 - ***Done with joins, maps, ordering: 0:00:00.072069
+2026-08-10 11:44:03,321 - ***Build main widgets...
+2026-08-10 11:44:03,346 - ***Done with main widgets.
+2026-08-10 11:44:03,347 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:03,385 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.037864
+2026-08-10 11:44:03,385 - ***Building Figures...
+2026-08-10 11:44:03,429 - ***Done Building Figures.
+
+2026-08-10 11:44:03,448 - ***Building report section: Regional Gen Final (TWh)...
+2026-08-10 11:44:03,448 - ***Fetching Generation BA (TWh) [no-index] for selected scenarios...
+2026-08-10 11:44:03,451 - ***Done fetching Generation BA (TWh) [no-index] for 20260810_Pacific_highdem.
+2026-08-10 11:44:03,451 - ***Done fetching Generation BA (TWh) [no-index]: 0:00:00.003238
+2026-08-10 11:44:03,451 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:03,486 - ***Done with joins, maps, ordering: 0:00:00.034235
+2026-08-10 11:44:03,486 - ***Build main widgets...
+2026-08-10 11:44:03,514 - ***Done with main widgets.
+2026-08-10 11:44:03,515 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:03,521 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.006260
+2026-08-10 11:44:03,521 - ***Building Figures...
+2026-08-10 11:44:03,563 - ***Done Building Figures.
+
+2026-08-10 11:44:03,576 - ***Building report section: Operating Reserves (TW-h)...
+2026-08-10 11:44:03,577 - ***Fetching Operating Reserves (TW-h) for selected scenarios...
+2026-08-10 11:44:03,579 - ***Done fetching Operating Reserves (TW-h) for 20260810_Pacific_highdem.
+2026-08-10 11:44:03,582 - ***Done fetching Operating Reserves (TW-h): 0:00:00.005481
+2026-08-10 11:44:03,582 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:03,608 - ***Done with joins, maps, ordering: 0:00:00.026101
+2026-08-10 11:44:03,609 - ***Build main widgets...
+2026-08-10 11:44:03,636 - ***Done with main widgets.
+2026-08-10 11:44:03,638 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:03,639 - ***Building Figures...
+2026-08-10 11:44:03,639 - ***Done Building Figures.
+
+2026-08-10 11:44:03,641 - ***Building report section: Final OpRes by timeslice (GW)...
+2026-08-10 11:44:03,642 - ***Fetching Operating Reserves by Timeslice National (GW) for selected scenarios...
+2026-08-10 11:44:03,644 - ***Done fetching Operating Reserves by Timeslice National (GW) for 20260810_Pacific_highdem.
+2026-08-10 11:44:03,647 - ***Done fetching Operating Reserves by Timeslice National (GW): 0:00:00.004822
+2026-08-10 11:44:03,647 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:03,672 - ***Done with joins, maps, ordering: 0:00:00.025856
+2026-08-10 11:44:03,673 - ***Build main widgets...
+2026-08-10 11:44:03,703 - ***Done with main widgets.
+2026-08-10 11:44:03,706 - ***Error in section 12...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 704, in preset_wdg
+    wdg['x'].value = preset['x']
+    ^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2209, in update_wdg_col
+    update_plots()
+    ~~~~~~~~~~~~^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2269, in update_plots
+    GL['widgets']['display_config'].text = display_config(GL['widgets'], GL['wdg_defaults'])
+                                           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2047, in display_config
+    item_string += wdg[key].labels[i] + ', '
+                   ~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+2026-08-10 11:44:03,706 - ***Building report section: Firm Capacity (GW)...
+2026-08-10 11:44:03,706 - ***Fetching Firm Capacity National (GW) for selected scenarios...
+2026-08-10 11:44:03,716 - ***Done fetching Firm Capacity National (GW) for 20260810_Pacific_highdem.
+2026-08-10 11:44:03,718 - ***Done fetching Firm Capacity National (GW): 0:00:00.011426
+2026-08-10 11:44:03,718 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:03,745 - ***Done with joins, maps, ordering: 0:00:00.027518
+2026-08-10 11:44:03,746 - ***Build main widgets...
+2026-08-10 11:44:03,754 - ***Error in section 13...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 638, in preset_wdg
+    GL['widgets'][key].value = preset[key]
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 541, in update_reeds_result
+    update_reeds_wdg(wdg_type='result')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 608, in update_reeds_wdg
+    core.GL['widgets'].update(core.build_widgets(core.GL['df_source'], core.GL['columns'], wdg_defaults=core.GL['wdg_defaults']))
+                              ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 891, in build_widgets
+    val_list = [str(i) for i in sorted(df_source[col].unique().tolist())]
+                                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'str' and 'float'
+
+2026-08-10 11:44:03,755 - ***Building report section: Curtailment Rate...
+2026-08-10 11:44:03,755 - ***Fetching Average VRE Curtailment for selected scenarios...
+2026-08-10 11:44:03,757 - ***Done fetching Average VRE Curtailment for 20260810_Pacific_highdem.
+2026-08-10 11:44:03,759 - ***Done fetching Average VRE Curtailment: 0:00:00.003965
+2026-08-10 11:44:03,759 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:03,760 - ***Done with joins, maps, ordering: 0:00:00.000600
+2026-08-10 11:44:03,760 - ***Build main widgets...
+2026-08-10 11:44:03,783 - ***Done with main widgets.
+2026-08-10 11:44:03,784 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:03,786 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.002167
+2026-08-10 11:44:03,786 - ***Building Figures...
+2026-08-10 11:44:03,793 - ***Done Building Figures.
+
+2026-08-10 11:44:03,796 - ***Building report section: Losses (fraction of load)...
+2026-08-10 11:44:03,796 - ***Fetching Losses (TWh) for selected scenarios...
+2026-08-10 11:44:03,799 - ***Done fetching Losses (TWh) for 20260810_Pacific_highdem.
+2026-08-10 11:44:03,802 - ***Done fetching Losses (TWh): 0:00:00.005523
+2026-08-10 11:44:03,802 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:03,803 - ***Done with joins, maps, ordering: 0:00:00.000619
+2026-08-10 11:44:03,803 - ***Build main widgets...
+2026-08-10 11:44:03,823 - ***Done with main widgets.
+2026-08-10 11:44:03,825 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:03,832 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.007076
+2026-08-10 11:44:03,832 - ***Building Figures...
+2026-08-10 11:44:03,854 - ***Done Building Figures.
+
+2026-08-10 11:44:03,861 - ***Building report section: Transmission (GW-mi)...
+2026-08-10 11:44:03,861 - ***Fetching Transmission (GW-mi) for selected scenarios...
+2026-08-10 11:44:03,878 - ***Done fetching Transmission (GW-mi) for 20260810_Pacific_highdem.
+2026-08-10 11:44:03,880 - ***Done fetching Transmission (GW-mi): 0:00:00.019001
+2026-08-10 11:44:03,880 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:03,882 - ***Done with joins, maps, ordering: 0:00:00.002201
+2026-08-10 11:44:03,883 - ***Build main widgets...
+2026-08-10 11:44:03,921 - ***Done with main widgets.
+2026-08-10 11:44:03,922 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:03,928 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.005577
+2026-08-10 11:44:03,928 - ***Building Figures...
+2026-08-10 11:44:03,945 - ***Done Building Figures.
+
+2026-08-10 11:44:03,952 - ***Building report section: Transmission (PRM) (GW-mi)...
+2026-08-10 11:44:03,954 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:03,960 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.005992
+2026-08-10 11:44:03,961 - ***Building Figures...
+2026-08-10 11:44:03,973 - ***Done Building Figures.
+
+2026-08-10 11:44:03,978 - ***Building report section: Bulk System Electricity Price ($/MWh)...
+2026-08-10 11:44:03,978 - ***Fetching Requirement Prices and Quantities National for selected scenarios...
+2026-08-10 11:44:03,991 - ***Done fetching Requirement Prices and Quantities National for 20260810_Pacific_highdem.
+2026-08-10 11:44:03,991 - ***Done fetching Requirement Prices and Quantities National: 0:00:00.013144
+2026-08-10 11:44:03,992 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:03,993 - ***Done with joins, maps, ordering: 0:00:00.001187
+2026-08-10 11:44:03,993 - ***Build main widgets...
+2026-08-10 11:44:04,018 - ***Done with main widgets.
+2026-08-10 11:44:04,020 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:04,027 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.006961
+2026-08-10 11:44:04,027 - ***Building Figures...
+2026-08-10 11:44:04,043 - ***Done Building Figures.
+
+2026-08-10 11:44:04,049 - ***Building report section: National Energy Price ($/MWh)...
+2026-08-10 11:44:04,053 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:04,060 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.006617
+2026-08-10 11:44:04,060 - ***Building Figures...
+2026-08-10 11:44:04,067 - ***Done Building Figures.
+
+2026-08-10 11:44:04,070 - ***Building report section: Final National Energy Price by timeslice ($/MWh)...
+2026-08-10 11:44:04,073 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:04,099 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.025255
+2026-08-10 11:44:04,099 - ***Building Figures...
+2026-08-10 11:44:04,110 - ***Done Building Figures.
+
+2026-08-10 11:44:04,116 - ***Building report section: National Average Electricity Cost ($/MWh)...
+2026-08-10 11:44:04,116 - ***Fetching National Average Electricity Cost ($/MWh) for selected scenarios...
+2026-08-10 11:44:04,175 - ***Done fetching National Average Electricity Cost ($/MWh) for 20260810_Pacific_highdem.
+2026-08-10 11:44:04,175 - ***Done fetching National Average Electricity Cost ($/MWh): 0:00:00.058768
+2026-08-10 11:44:04,175 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:04,183 - ***Done with joins, maps, ordering: 0:00:00.007390
+2026-08-10 11:44:04,183 - ***Build main widgets...
+2026-08-10 11:44:04,205 - ***Done with main widgets.
+2026-08-10 11:44:04,207 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:04,253 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.046261
+2026-08-10 11:44:04,253 - ***Building Figures...
+2026-08-10 11:44:04,289 - ***Done Building Figures.
+
+2026-08-10 11:44:04,308 - ***Building report section: National OpRes Price ($/MW-h)...
+2026-08-10 11:44:04,309 - ***Fetching Requirement Prices and Quantities National for selected scenarios...
+2026-08-10 11:44:04,309 - ***Done fetching Requirement Prices and Quantities National for 20260810_Pacific_highdem.
+2026-08-10 11:44:04,309 - ***Done fetching Requirement Prices and Quantities National: 0:00:00.000566
+2026-08-10 11:44:04,309 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:04,311 - ***Done with joins, maps, ordering: 0:00:00.001255
+2026-08-10 11:44:04,311 - ***Build main widgets...
+2026-08-10 11:44:04,334 - ***Done with main widgets.
+2026-08-10 11:44:04,336 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:04,353 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.016318
+2026-08-10 11:44:04,353 - ***Building Figures...
+2026-08-10 11:44:04,380 - ***Done Building Figures.
+
+2026-08-10 11:44:04,387 - ***Building report section: Final National OpRes Price by timeslice ($/MW-h)...
+2026-08-10 11:44:04,390 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:04,473 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.083328
+2026-08-10 11:44:04,474 - ***Building Figures...
+2026-08-10 11:44:04,507 - ***Done Building Figures.
+
+2026-08-10 11:44:04,520 - ***Building report section: Final Regional Energy Price ($/MWh)...
+2026-08-10 11:44:04,521 - ***Fetching Requirement Prices and Quantities BA Annual for selected scenarios...
+2026-08-10 11:44:04,589 - ***Done fetching Requirement Prices and Quantities BA Annual for 20260810_Pacific_highdem.
+2026-08-10 11:44:04,590 - ***Done fetching Requirement Prices and Quantities BA Annual: 0:00:00.068827
+2026-08-10 11:44:04,590 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:04,592 - ***Done with joins, maps, ordering: 0:00:00.002734
+2026-08-10 11:44:04,593 - ***Build main widgets...
+2026-08-10 11:44:04,618 - ***Done with main widgets.
+2026-08-10 11:44:04,619 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:04,626 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.006887
+2026-08-10 11:44:04,626 - ***Building Maps...
+2026-08-10 11:44:04,633 - ***Error in section 24...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 704, in preset_wdg
+    wdg['x'].value = preset['x']
+    ^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2209, in update_wdg_col
+    update_plots()
+    ~~~~~~~~~~~~^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2280, in update_plots
+    figs, breakpoints = create_maps(GL['df_plots'], GL['widgets'], GL['columns'])
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1741, in create_maps
+    maps.append(create_map(map_type, df_map, ranges, region_boundaries, centroids, wdg, colors_full, title))
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1813, in create_map
+    height=int(height),
+           ~~~^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+2026-08-10 11:44:04,633 - ***Building report section: National Annual Capacity Price ($/kW-yr)...
+2026-08-10 11:44:04,633 - ***Fetching Requirement Prices and Quantities National for selected scenarios...
+2026-08-10 11:44:04,634 - ***Done fetching Requirement Prices and Quantities National for 20260810_Pacific_highdem.
+2026-08-10 11:44:04,634 - ***Done fetching Requirement Prices and Quantities National: 0:00:00.000453
+2026-08-10 11:44:04,634 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:04,635 - ***Done with joins, maps, ordering: 0:00:00.001138
+2026-08-10 11:44:04,635 - ***Build main widgets...
+2026-08-10 11:44:04,658 - ***Done with main widgets.
+2026-08-10 11:44:04,661 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:04,668 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.007418
+2026-08-10 11:44:04,668 - ***Building Figures...
+2026-08-10 11:44:04,675 - ***Done Building Figures.
+
+2026-08-10 11:44:04,679 - ***Building report section: Annual Revenue National (Bil$/yr)...
+2026-08-10 11:44:04,679 - ***Fetching Annual Revenue National for selected scenarios...
+2026-08-10 11:44:04,688 - ***Done fetching Annual Revenue National for 20260810_Pacific_highdem.
+2026-08-10 11:44:04,688 - ***Done fetching Annual Revenue National: 0:00:00.009123
+2026-08-10 11:44:04,688 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:04,721 - ***Done with joins, maps, ordering: 0:00:00.032941
+2026-08-10 11:44:04,722 - ***Build main widgets...
+2026-08-10 11:44:04,745 - ***Done with main widgets.
+2026-08-10 11:44:04,747 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:04,778 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.031259
+2026-08-10 11:44:04,779 - ***Building Figures...
+2026-08-10 11:44:04,924 - ***Done Building Figures.
+
+2026-08-10 11:44:04,964 - ***Building report section: Annual Revenue per Capacity National ($/kW-yr)...
+2026-08-10 11:44:04,966 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:04,990 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.023641
+2026-08-10 11:44:04,990 - ***Building Figures...
+2026-08-10 11:44:05,268 - ***Done Building Figures.
+
+2026-08-10 11:44:05,316 - ***Building report section: Annual Revenue per Generation National ($/MWh)...
+2026-08-10 11:44:05,319 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:05,342 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.022915
+2026-08-10 11:44:05,342 - ***Building Figures...
+2026-08-10 11:44:05,566 - ***Done Building Figures.
+
+2026-08-10 11:44:05,613 - ***Building report section: Present Value of System Cost through 2050 (Bil $)...
+2026-08-10 11:44:05,614 - ***Fetching Sys Cost Annualized (Bil $) for selected scenarios...
+2026-08-10 11:44:05,636 - ***Done fetching Sys Cost Annualized (Bil $) for 20260810_Pacific_highdem.
+2026-08-10 11:44:05,638 - ***Done fetching Sys Cost Annualized (Bil $): 0:00:00.024571
+2026-08-10 11:44:05,638 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:05,645 - ***Done with joins, maps, ordering: 0:00:00.006887
+2026-08-10 11:44:05,646 - ***Build main widgets...
+2026-08-10 11:44:05,668 - ***Done with main widgets.
+2026-08-10 11:44:05,669 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:05,673 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.004472
+2026-08-10 11:44:05,673 - ***Building Figures...
+2026-08-10 11:44:05,707 - ***Done Building Figures.
+
+2026-08-10 11:44:05,717 - ***Building report section: Emissions National (metric tons)...
+2026-08-10 11:44:05,717 - ***Fetching Emissions National (metric tons) for selected scenarios...
+2026-08-10 11:44:05,719 - ***Done fetching Emissions National (metric tons) for 20260810_Pacific_highdem.
+2026-08-10 11:44:05,722 - ***Done fetching Emissions National (metric tons): 0:00:00.004729
+2026-08-10 11:44:05,722 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:05,723 - ***Done with joins, maps, ordering: 0:00:00.000584
+2026-08-10 11:44:05,723 - ***Build main widgets...
+2026-08-10 11:44:05,743 - ***Done with main widgets.
+2026-08-10 11:44:05,744 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:05,751 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.006097
+2026-08-10 11:44:05,751 - ***Building Figures...
+2026-08-10 11:44:05,795 - ***Done Building Figures.
+
+2026-08-10 11:44:05,806 - ***Building report section: Net CO2e Emissions National (MMton)...
+2026-08-10 11:44:05,806 - ***Fetching Net CO2e Emissions National (MMton) for selected scenarios...
+2026-08-10 11:44:05,810 - ***Done fetching Net CO2e Emissions National (MMton) for 20260810_Pacific_highdem.
+2026-08-10 11:44:05,810 - ***Done fetching Net CO2e Emissions National (MMton): 0:00:00.003562
+2026-08-10 11:44:05,810 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:05,835 - ***Done with joins, maps, ordering: 0:00:00.024945
+2026-08-10 11:44:05,835 - ***Build main widgets...
+2026-08-10 11:44:05,859 - ***Done with main widgets.
+2026-08-10 11:44:05,860 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:05,860 - ***Building Figures...
+2026-08-10 11:44:05,863 - ***Done Building Figures.
+
+2026-08-10 11:44:05,866 - ***Building report section: CO2 Abatement Cost ($/metric ton)...
+2026-08-10 11:44:05,866 - ***Fetching CO2 Price ($/metric ton) for selected scenarios...
+2026-08-10 11:44:05,868 - ***Done fetching CO2 Price ($/metric ton) for 20260810_Pacific_highdem.
+2026-08-10 11:44:05,870 - ***Done fetching CO2 Price ($/metric ton): 0:00:00.003756
+2026-08-10 11:44:05,870 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:05,870 - ***Done with joins, maps, ordering: 0:00:00.000517
+2026-08-10 11:44:05,871 - ***Build main widgets...
+2026-08-10 11:44:05,890 - ***Done with main widgets.
+2026-08-10 11:44:05,891 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:05,891 - ***Building Figures...
+2026-08-10 11:44:05,897 - ***Done Building Figures.
+
+2026-08-10 11:44:05,900 - ***Building report section: Undiscounted Annualized System Cost (Bil $)...
+2026-08-10 11:44:05,901 - ***Fetching Sys Cost Annualized (Bil $) for selected scenarios...
+2026-08-10 11:44:05,901 - ***Done fetching Sys Cost Annualized (Bil $) for 20260810_Pacific_highdem.
+2026-08-10 11:44:05,904 - ***Done fetching Sys Cost Annualized (Bil $): 0:00:00.003527
+2026-08-10 11:44:05,904 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:05,912 - ***Done with joins, maps, ordering: 0:00:00.007659
+2026-08-10 11:44:05,912 - ***Build main widgets...
+2026-08-10 11:44:05,933 - ***Done with main widgets.
+2026-08-10 11:44:05,935 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,001 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.066242
+2026-08-10 11:44:06,001 - ***Building Figures...
+2026-08-10 11:44:06,037 - ***Done Building Figures.
+
+2026-08-10 11:44:06,075 - ***Building report section: Hydrogen Production (Million metric tons)...
+2026-08-10 11:44:06,075 - ***Fetching Production (Million metric tons) for selected scenarios...
+2026-08-10 11:44:06,078 - ***Done fetching Production (Million metric tons) for 20260810_Pacific_highdem.
+2026-08-10 11:44:06,078 - ***Done fetching Production (Million metric tons): 0:00:00.002880
+2026-08-10 11:44:06,078 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:06,106 - ***Done with joins, maps, ordering: 0:00:00.027408
+2026-08-10 11:44:06,106 - ***Build main widgets...
+2026-08-10 11:44:06,133 - ***Done with main widgets.
+2026-08-10 11:44:06,134 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,138 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.003920
+2026-08-10 11:44:06,138 - ***Building Figures...
+2026-08-10 11:44:06,150 - ***Done Building Figures.
+
+2026-08-10 11:44:06,154 - ***Building report section: Hydrogen Price ($ per kg)...
+2026-08-10 11:44:06,154 - ***Fetching Hydrogen Price ($/kg) for selected scenarios...
+2026-08-10 11:44:06,157 - ***Done fetching Hydrogen Price ($/kg) for 20260810_Pacific_highdem.
+2026-08-10 11:44:06,157 - ***Done fetching Hydrogen Price ($/kg): 0:00:00.002405
+2026-08-10 11:44:06,157 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:06,158 - ***Done with joins, maps, ordering: 0:00:00.000709
+2026-08-10 11:44:06,158 - ***Build main widgets...
+2026-08-10 11:44:06,180 - ***Done with main widgets.
+2026-08-10 11:44:06,181 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,184 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.002679
+2026-08-10 11:44:06,184 - ***Building Figures...
+2026-08-10 11:44:06,191 - ***Done Building Figures.
+
+2026-08-10 11:44:06,194 - ***Building report section: Final Wind Capacity (GW)...
+2026-08-10 11:44:06,194 - ***Fetching Capacity BA (GW) for selected scenarios...
+2026-08-10 11:44:06,197 - ***Done fetching Capacity BA (GW) for 20260810_Pacific_highdem.
+2026-08-10 11:44:06,200 - ***Done fetching Capacity BA (GW): 0:00:00.006038
+2026-08-10 11:44:06,200 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:06,247 - ***Done with joins, maps, ordering: 0:00:00.046429
+2026-08-10 11:44:06,247 - ***Build main widgets...
+2026-08-10 11:44:06,271 - ***Done with main widgets.
+2026-08-10 11:44:06,273 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,276 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.003795
+2026-08-10 11:44:06,276 - ***Building Maps...
+2026-08-10 11:44:06,283 - ***Error in section 36...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 704, in preset_wdg
+    wdg['x'].value = preset['x']
+    ^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2209, in update_wdg_col
+    update_plots()
+    ~~~~~~~~~~~~^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2280, in update_plots
+    figs, breakpoints = create_maps(GL['df_plots'], GL['widgets'], GL['columns'])
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1741, in create_maps
+    maps.append(create_map(map_type, df_map, ranges, region_boundaries, centroids, wdg, colors_full, title))
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1813, in create_map
+    height=int(height),
+           ~~~^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+2026-08-10 11:44:06,283 - ***Building report section: Final PV Capacity (GW)...
+2026-08-10 11:44:06,285 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,289 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.003832
+2026-08-10 11:44:06,289 - ***Building Maps...
+2026-08-10 11:44:06,295 - ***Error in section 37...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 704, in preset_wdg
+    wdg['x'].value = preset['x']
+    ^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2209, in update_wdg_col
+    update_plots()
+    ~~~~~~~~~~~~^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2280, in update_plots
+    figs, breakpoints = create_maps(GL['df_plots'], GL['widgets'], GL['columns'])
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1741, in create_maps
+    maps.append(create_map(map_type, df_map, ranges, region_boundaries, centroids, wdg, colors_full, title))
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1813, in create_map
+    height=int(height),
+           ~~~^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+2026-08-10 11:44:06,296 - ***Building report section: Area used for UPV (sq. km.)...
+2026-08-10 11:44:06,296 - ***Fetching UPV land area (sq. km.) for selected scenarios...
+2026-08-10 11:44:06,298 - ***Error in section 38...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 355, in get_src
+    df_src = pd.read_csv(filepath, low_memory=False, **kwargs)
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/pandas/io/common.py", line 930, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/bsergi/Documents/github/ReEDS/runs/20260810_Pacific_highdem/outputs/land_use_total.csv'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 638, in preset_wdg
+    GL['widgets'][key].value = preset[key]
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 541, in update_reeds_result
+    update_reeds_wdg(wdg_type='result')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 603, in update_reeds_wdg
+    get_reeds_data(core.GL['variant_wdg'], GL_REEDS['scenarios'], GL_REEDS['result_dfs'])
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 309, in get_reeds_data
+    df_scen_result = get_src(scenarios[i], result_meta)
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/reeds_bokeh.py", line 357, in get_src
+    df_src = read_input(scen['path'], src['name'], low_memory=False, **kwargs)
+                                      ~~~^^^^^^^^
+KeyError: 'name'
+
+2026-08-10 11:44:06,299 - ***Building report section: Final CSP Capacity (GW)...
+2026-08-10 11:44:06,299 - ***Fetching Capacity BA (GW) for selected scenarios...
+2026-08-10 11:44:06,299 - ***Done fetching Capacity BA (GW) for 20260810_Pacific_highdem.
+2026-08-10 11:44:06,302 - ***Done fetching Capacity BA (GW): 0:00:00.003437
+2026-08-10 11:44:06,302 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:06,349 - ***Done with joins, maps, ordering: 0:00:00.046645
+2026-08-10 11:44:06,349 - ***Build main widgets...
+2026-08-10 11:44:06,375 - ***Done with main widgets.
+2026-08-10 11:44:06,376 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,379 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.002966
+2026-08-10 11:44:06,380 - ***Building Maps...
+2026-08-10 11:44:06,386 - ***Error in section 39...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 704, in preset_wdg
+    wdg['x'].value = preset['x']
+    ^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2209, in update_wdg_col
+    update_plots()
+    ~~~~~~~~~~~~^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2280, in update_plots
+    figs, breakpoints = create_maps(GL['df_plots'], GL['widgets'], GL['columns'])
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1741, in create_maps
+    maps.append(create_map(map_type, df_map, ranges, region_boundaries, centroids, wdg, colors_full, title))
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1813, in create_map
+    height=int(height),
+           ~~~^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+2026-08-10 11:44:06,387 - ***Building report section: Final Biopower Capacity (GW)...
+2026-08-10 11:44:06,388 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,392 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.003763
+2026-08-10 11:44:06,392 - ***Building Maps...
+2026-08-10 11:44:06,399 - ***Error in section 40...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 704, in preset_wdg
+    wdg['x'].value = preset['x']
+    ^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2209, in update_wdg_col
+    update_plots()
+    ~~~~~~~~~~~~^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2280, in update_plots
+    figs, breakpoints = create_maps(GL['df_plots'], GL['widgets'], GL['columns'])
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1741, in create_maps
+    maps.append(create_map(map_type, df_map, ranges, region_boundaries, centroids, wdg, colors_full, title))
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1813, in create_map
+    height=int(height),
+           ~~~^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+2026-08-10 11:44:06,399 - ***Building report section: Final Geothermal Capacity (GW)...
+2026-08-10 11:44:06,401 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,405 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.003668
+2026-08-10 11:44:06,405 - ***Building Maps...
+2026-08-10 11:44:06,411 - ***Error in section 41...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 704, in preset_wdg
+    wdg['x'].value = preset['x']
+    ^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2209, in update_wdg_col
+    update_plots()
+    ~~~~~~~~~~~~^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2280, in update_plots
+    figs, breakpoints = create_maps(GL['df_plots'], GL['widgets'], GL['columns'])
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1741, in create_maps
+    maps.append(create_map(map_type, df_map, ranges, region_boundaries, centroids, wdg, colors_full, title))
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1813, in create_map
+    height=int(height),
+           ~~~^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+2026-08-10 11:44:06,411 - ***Building report section: Final Hydro and Canadian Import Capacity (GW)...
+2026-08-10 11:44:06,413 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,418 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.004116
+2026-08-10 11:44:06,418 - ***Building Maps...
+2026-08-10 11:44:06,424 - ***Error in section 42...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 704, in preset_wdg
+    wdg['x'].value = preset['x']
+    ^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2209, in update_wdg_col
+    update_plots()
+    ~~~~~~~~~~~~^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2280, in update_plots
+    figs, breakpoints = create_maps(GL['df_plots'], GL['widgets'], GL['columns'])
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1741, in create_maps
+    maps.append(create_map(map_type, df_map, ranges, region_boundaries, centroids, wdg, colors_full, title))
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1813, in create_map
+    height=int(height),
+           ~~~^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+2026-08-10 11:44:06,424 - ***Building report section: Final Pumped-hydro Capacity (GW)...
+2026-08-10 11:44:06,426 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,429 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.003272
+2026-08-10 11:44:06,429 - ***Building Maps...
+2026-08-10 11:44:06,436 - ***Error in section 43...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 704, in preset_wdg
+    wdg['x'].value = preset['x']
+    ^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2209, in update_wdg_col
+    update_plots()
+    ~~~~~~~~~~~~^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2280, in update_plots
+    figs, breakpoints = create_maps(GL['df_plots'], GL['widgets'], GL['columns'])
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1741, in create_maps
+    maps.append(create_map(map_type, df_map, ranges, region_boundaries, centroids, wdg, colors_full, title))
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1813, in create_map
+    height=int(height),
+           ~~~^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+2026-08-10 11:44:06,436 - ***Building report section: Final Battery Storage Capacity (GW)...
+2026-08-10 11:44:06,438 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,442 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.003819
+2026-08-10 11:44:06,442 - ***Building Maps...
+2026-08-10 11:44:06,448 - ***Error in section 44...
+Traceback (most recent call last):
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 418, in static_report
+    preset_wdg(preset, download_full_source)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 704, in preset_wdg
+    wdg['x'].value = preset['x']
+    ^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/has_props.py", line 340, in __setattr__
+    return super().__setattr__(name, value)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 332, in __set__
+    self._set(obj, old, value, setter=setter)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 616, in _set
+    self._trigger(obj, old, value, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/core/property/descriptors.py", line 694, in _trigger
+    obj.trigger(self.name, old, value, hint, setter)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/model/model.py", line 587, in trigger
+    super().trigger(descriptor.name, old, new, hint=hint, setter=setter)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 184, in trigger
+    invoke()
+    ~~~~~~^^
+  File "/Users/bsergi/miniforge3/envs/reeds/lib/python3.14/site-packages/bokeh/util/callback_manager.py", line 179, in invoke
+    callback(attr, old, new)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2209, in update_wdg_col
+    update_plots()
+    ~~~~~~~~~~~~^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 2280, in update_plots
+    figs, breakpoints = create_maps(GL['df_plots'], GL['widgets'], GL['columns'])
+                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1741, in create_maps
+    maps.append(create_map(map_type, df_map, ranges, region_boundaries, centroids, wdg, colors_full, title))
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bsergi/Documents/github/ReEDS/postprocessing/bokehpivot/core.py", line 1813, in create_map
+    height=int(height),
+           ~~~^^^^^^^^
+ValueError: cannot convert float NaN to integer
+
+2026-08-10 11:44:06,449 - ***Building report section: Capacity Factor - Generation...
+2026-08-10 11:44:06,449 - ***Fetching Capacity Factor ivrt for selected scenarios...
+2026-08-10 11:44:06,461 - ***Done fetching Capacity Factor ivrt for 20260810_Pacific_highdem.
+2026-08-10 11:44:06,461 - ***Done fetching Capacity Factor ivrt: 0:00:00.011683
+2026-08-10 11:44:06,461 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:06,505 - ***Done with joins, maps, ordering: 0:00:00.043860
+2026-08-10 11:44:06,505 - ***Build main widgets...
+2026-08-10 11:44:06,532 - ***Done with main widgets.
+2026-08-10 11:44:06,534 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,551 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.016737
+2026-08-10 11:44:06,551 - ***Building Figures...
+2026-08-10 11:44:06,674 - ***Done Building Figures.
+
+2026-08-10 11:44:06,699 - ***Building report section: Battery Average Duration (h)...
+2026-08-10 11:44:06,699 - ***Fetching Battery Duration (h) for selected scenarios...
+2026-08-10 11:44:06,707 - ***Done fetching Battery Duration (h) for 20260810_Pacific_highdem.
+2026-08-10 11:44:06,707 - ***Done fetching Battery Duration (h): 0:00:00.007306
+2026-08-10 11:44:06,707 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:06,733 - ***Done with joins, maps, ordering: 0:00:00.026062
+2026-08-10 11:44:06,733 - ***Build main widgets...
+2026-08-10 11:44:06,760 - ***Done with main widgets.
+2026-08-10 11:44:06,762 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,766 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.004572
+2026-08-10 11:44:06,767 - ***Building Figures...
+2026-08-10 11:44:06,773 - ***Done Building Figures.
+
+2026-08-10 11:44:06,776 - ***Building report section: Retail rate (¢/kWh)...
+2026-08-10 11:44:06,776 - ***Fetching Retail rate (¢/kWh) for selected scenarios...
+2026-08-10 11:44:06,777 - ***Done fetching Retail rate (¢/kWh) for 20260810_Pacific_highdem.
+2026-08-10 11:44:06,777 - ***Done fetching Retail rate (¢/kWh): 0:00:00.000757
+2026-08-10 11:44:06,777 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:06,777 - ***Done with joins, maps, ordering: 0:00:00.000444
+2026-08-10 11:44:06,778 - ***Build main widgets...
+2026-08-10 11:44:06,797 - ***Done with main widgets.
+2026-08-10 11:44:06,799 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,803 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.003906
+2026-08-10 11:44:06,803 - ***Building Figures...
+2026-08-10 11:44:06,810 - ***Done Building Figures.
+
+2026-08-10 11:44:06,814 - ***Building report section: New Tech Value Factors...
+2026-08-10 11:44:06,814 - ***Fetching Value New Techs for selected scenarios...
+2026-08-10 11:44:06,845 - ***Done fetching Value New Techs for 20260810_Pacific_highdem.
+2026-08-10 11:44:06,845 - ***Done fetching Value New Techs: 0:00:00.031301
+2026-08-10 11:44:06,845 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:06,877 - ***Done with joins, maps, ordering: 0:00:00.031975
+2026-08-10 11:44:06,878 - ***Build main widgets...
+2026-08-10 11:44:06,903 - ***Done with main widgets.
+2026-08-10 11:44:06,905 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:06,915 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.010173
+2026-08-10 11:44:06,915 - ***Building Figures...
+2026-08-10 11:44:06,959 - ***Done Building Figures.
+
+2026-08-10 11:44:06,972 - ***Building report section: Monetized health damages over time (billion $/year)...
+2026-08-10 11:44:06,972 - ***Fetching Health Damages from Emissions for selected scenarios...
+2026-08-10 11:44:06,983 - ***Done fetching Health Damages from Emissions for 20260810_Pacific_highdem.
+2026-08-10 11:44:06,983 - ***Done fetching Health Damages from Emissions: 0:00:00.010151
+2026-08-10 11:44:06,983 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:06,984 - ***Done with joins, maps, ordering: 0:00:00.000893
+2026-08-10 11:44:06,984 - ***Build main widgets...
+2026-08-10 11:44:07,005 - ***Done with main widgets.
+2026-08-10 11:44:07,007 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:07,021 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.014564
+2026-08-10 11:44:07,021 - ***Building Figures...
+2026-08-10 11:44:07,060 - ***Done Building Figures.
+
+2026-08-10 11:44:07,073 - ***Building report section: Mortality over time (lives/year)...
+2026-08-10 11:44:07,075 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:07,088 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.012477
+2026-08-10 11:44:07,088 - ***Building Figures...
+2026-08-10 11:44:07,126 - ***Done Building Figures.
+
+2026-08-10 11:44:07,137 - ***Building report section: Total undiscounted health damages through 2050 (billion $)...
+2026-08-10 11:44:07,139 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:07,144 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.004805
+2026-08-10 11:44:07,144 - ***Building Figures...
+2026-08-10 11:44:07,211 - ***Done Building Figures.
+
+2026-08-10 11:44:07,228 - ***Building report section: Total discounted health damages through 2050 (billion $)...
+2026-08-10 11:44:07,231 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:07,235 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.004808
+2026-08-10 11:44:07,235 - ***Building Figures...
+2026-08-10 11:44:07,301 - ***Done Building Figures.
+
+2026-08-10 11:44:07,318 - ***Building report section: Total mortality through 2050 (lives)...
+2026-08-10 11:44:07,321 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:07,325 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.004660
+2026-08-10 11:44:07,325 - ***Building Figures...
+2026-08-10 11:44:07,394 - ***Done Building Figures.
+
+2026-08-10 11:44:07,411 - ***Building report section: System cost + health damages: ACS ($/MWh)...
+2026-08-10 11:44:07,412 - ***Fetching Total Social Costs for selected scenarios...
+2026-08-10 11:44:07,478 - ***Done fetching Total Social Costs for 20260810_Pacific_highdem.
+2026-08-10 11:44:07,478 - ***Done fetching Total Social Costs: 0:00:00.066183
+2026-08-10 11:44:07,478 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:07,479 - ***Done with joins, maps, ordering: 0:00:00.000915
+2026-08-10 11:44:07,479 - ***Build main widgets...
+2026-08-10 11:44:07,622 - ***Done with main widgets.
+2026-08-10 11:44:07,624 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:07,639 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.015141
+2026-08-10 11:44:07,639 - ***Building Figures...
+2026-08-10 11:44:07,675 - ***Done Building Figures.
+
+2026-08-10 11:44:07,687 - ***Building report section: System cost + health damages: H6C ($/MWh)...
+2026-08-10 11:44:07,689 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:07,704 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.014956
+2026-08-10 11:44:07,705 - ***Building Figures...
+2026-08-10 11:44:07,738 - ***Done Building Figures.
+
+2026-08-10 11:44:07,751 - ***Building report section: Runtime (hours)...
+2026-08-10 11:44:07,751 - ***Fetching Runtime for selected scenarios...
+2026-08-10 11:44:07,753 - ***Done fetching Runtime for 20260810_Pacific_highdem.
+2026-08-10 11:44:07,753 - ***Done fetching Runtime: 0:00:00.002147
+2026-08-10 11:44:07,753 - ***Apply joins, maps, ordering to ReEDS data...
+2026-08-10 11:44:07,754 - ***Done with joins, maps, ordering: 0:00:00.000855
+2026-08-10 11:44:07,754 - ***Build main widgets...
+2026-08-10 11:44:07,775 - ***Done with main widgets.
+2026-08-10 11:44:07,776 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:07,781 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.005271
+2026-08-10 11:44:07,781 - ***Building Figures...
+2026-08-10 11:44:07,844 - ***Done Building Figures.
+
+2026-08-10 11:44:07,862 - ***Building report section: Runtime by year (hours)...
+2026-08-10 11:44:07,864 - ***Filtering, Scaling, Aggregating, Adv Operations, Sorting...
+2026-08-10 11:44:07,872 - ***Done Filtering, Scaling, Aggregating, Adv Operations, Sorting: 0:00:00.008506
+2026-08-10 11:44:07,872 - ***Building Figures...
+2026-08-10 11:44:07,938 - ***Done Building Figures.
+
+2026-08-10 11:44:30,020 - Starting new HTTPS connection (1): raw.githubusercontent.com:443
+2026-08-10 11:44:30,097 - https://raw.githubusercontent.com:443 "GET /mmowers/vizit/7011d363e40386264bedb3155629729b225fd22e/index.html HTTP/1.1" 200 22764

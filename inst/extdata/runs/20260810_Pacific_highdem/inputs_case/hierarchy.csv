@@ -1,0 +1,9 @@
+*r,nercr,transreg,transgrp,cendiv,st,interconnect,country,usda_region,h2ptcreg,hurdlereg,gasreg,ccreg
+CA_LA,WECC_CA,CAISO,CAISO,Pacific,CA,western,USA,pacific,California,CAISO,California,CAISO
+CA_N,WECC_CA,CAISO,CAISO,Pacific,CA,western,USA,pacific,California,CAISO,California,CAISO
+CA_S,WECC_CA,CAISO,CAISO,Pacific,CA,western,USA,pacific,California,CAISO,California,CAISO
+CA_SE,WECC_CA,CAISO,CAISO,Pacific,CA,western,USA,pacific,California,CAISO,California,CAISO
+OR_E,WECC_NW,NorthernGrid,NorthernGrid_West,Pacific,OR,western,USA,pacific,Northwest,Bonneville_Power_Administration,Northwest,NorthernGrid
+OR_W,WECC_NW,NorthernGrid,NorthernGrid_West,Pacific,OR,western,USA,pacific,Northwest,Bonneville_Power_Administration,Northwest,NorthernGrid
+WA_E,WECC_NW,NorthernGrid,NorthernGrid_West,Pacific,WA,western,USA,pacific,Northwest,Avista_Corp,Northwest,NorthernGrid
+WA_W,WECC_NW,NorthernGrid,NorthernGrid_West,Pacific,WA,western,USA,pacific,Northwest,Bonneville_Power_Administration,Northwest,NorthernGrid

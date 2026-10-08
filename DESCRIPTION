@@ -6,14 +6,25 @@ Authors@R:
            comment = c(ORCID = "0000-0002-3453-9878"))
 Description: Load, format, and plot ReEDS data
 License: GPL (>= 3)
+URL: https://NatLabRockies.github.io/reedling
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
   data.table  (>= 1.14.2),
+  lubridate   (>= 1.8.0),
   plyr        (>= 1.8.5),
   readxl      (>= 1.4.2),
   stringr     (>= 1.5.0),
   sf          (>= 1.0-5),
   rhdf5       (>= 2.46.1)
-
+Suggests:
+    knitr,
+    rmarkdown,
+    ggplot2,
+    ggthemes,
+    pkgdown
+VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
+LazyData: true

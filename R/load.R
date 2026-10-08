@@ -117,6 +117,12 @@ load_meta <- function(runs, summarize=FALSE, skip_lines=3){
       {
         # read in meta.csv, skipping comments at top
         df <- data.table::fread(file.path(path_name, "meta.csv"), skip=skip_lines)
+
+        # skip one more line if needed
+        if (colnames(df)[1] == "#") {
+          df <- data.table::fread(file.path(path_name, "meta.csv"), skip=skip_lines+1)
+        }
+
         df$run <- run_name
         # enforce date columns as POSIXct; this helps avoid
         # issues when combining meta files later
@@ -232,15 +238,9 @@ load_run_data <- function(runs, filename, folder="outputs", header=T) {
         df_all <- append(df_all, list(df))
       }
     }
-    # check for output information from e_report_params
-    if(folder == "outputs" & file.exists(file.path(run_folder, "e_report_params.csv"))){
-      e_report_params <- read.csv(file.path(run_folder, "e_report_params.csv"), comment.char = "#")
-      e_report_params$filename <- gsub("\\(.*?\\)", "", e_report_params$param)
-      e_report_params$filename <- ifelse(e_report_params$output_rename=="",
-                                         e_report_params$filename,
-                                         e_report_params$output_rename)
-      file_units <- e_report_params[e_report_params$filename==gsub(".csv", "", filename), "units"]
-      newcolname <- paste(gsub(".csv", "", filename), file_units, sep="_")
+    # check for output information from report_params
+    if(folder == "outputs"){
+      newcolname <- get_output_param_units(run_folder, gsub(".csv", "", filename))
       newcolname_all <- c(newcolname_all, newcolname)
     }
   }
@@ -254,20 +254,7 @@ load_run_data <- function(runs, filename, folder="outputs", header=T) {
 
   # specific formatting for output columns
   if(folder == "outputs"){
-    # get output column
-    valcolname <- colnames(df_out)[grepl("Val", colnames(df_out))]
-    # check that all runs have e_report_params.csv file
-    if(length(newcolname_all) != nrow(runs)){
-      cat("Caution: not all runs have 'e_report_params.csv'. Will skip renaming 'Val' column.")
-    } else if (length(unique(newcolname_all)) > 1) {
-      cat(sprintf("Caution: multiple column names detected from 'e_report_params.csv' across runs: %s.
-                  Will skip renaming 'Val' column.", paste(unique(newcolname_all), collapse=", ")))
-    } else {
-      # rename if new name is supplied
-      cat(sprintf("Updated column name: %s --> %s", valcolname, unique(newcolname_all)), sep="\n")
-      colnames(df_out)[colnames(df_out) == valcolname] <- unique(newcolname_all)
-      valcolname <- unique(newcolname_all)
-    }
+    df_out <- rename_val_column(df_out, newcolname_all, nrow(runs))
   }
   # report elapsed time
   elapsed <- proc.time() - tic
@@ -316,7 +303,6 @@ load_h5_data <- function(runs, resultname, folder="outputs"){
       if(nrow(df) > 0){
         # add run information
         df$run <- run_name
-        df$filename <- "outputs.h5"
         df_all <- append(df_all, list(df))
         cat(paste("Loaded", resultname, "from outputs.h5 for", run_name), sep="\n")
       }
@@ -327,14 +313,8 @@ load_h5_data <- function(runs, resultname, folder="outputs"){
     }
 
     # check for output information from e_report_params
-    if(folder == "outputs" & file.exists(file.path(run_folder, "e_report_params.csv"))){
-      e_report_params <- read.csv(file.path(run_folder, "e_report_params.csv"), comment.char = "#")
-      e_report_params$filename <- gsub("\\(.*?\\)", "", e_report_params$param)
-      e_report_params$filename <- ifelse(e_report_params$output_rename=="",
-                                         e_report_params$filename,
-                                         e_report_params$output_rename)
-      file_units <- e_report_params[e_report_params$filename==gsub(".csv", "", resultname), "units"]
-      newcolname <- paste(gsub(".csv", "", resultname), file_units, sep="_")
+    if(folder == "outputs"){
+      newcolname <- get_output_param_units(run_folder, resultname)
       newcolname_all <- c(newcolname_all, newcolname)
     }
   }
@@ -348,70 +328,13 @@ load_h5_data <- function(runs, resultname, folder="outputs"){
 
   # specific formatting for output columns
   if(folder == "outputs"){
-    # get output column
-    valcolname <- colnames(df_out)[grepl("Val", colnames(df_out))]
-    # check that all runs have e_report_params.csv file
-    if(length(newcolname_all) != nrow(runs)){
-      cat("Caution: not all runs have 'e_report_params.csv'. Will skip renaming 'Val' column.")
-    } else if (length(unique(newcolname_all)) > 1) {
-      cat(sprintf("Caution: multiple column names detected from 'e_report_params.csv' across runs: %s.
-                    Will skip renaming 'Val' column.", paste(unique(newcolname_all), collapse=", ")))
-    } else {
-      # rename if new name is supplied
-      cat(sprintf("Updated column name: %s --> %s", valcolname, unique(newcolname_all)), sep="\n")
-      colnames(df_out)[colnames(df_out) == valcolname] <- unique(newcolname_all)
-      valcolname <- unique(newcolname_all)
-    }
+    df_out <- rename_val_column(df_out, newcolname_all, nrow(runs))
   }
   # report elapsed time
   elapsed <- proc.time() - tic
   cat(paste0("All data loaded (", as.numeric(round(elapsed["elapsed"]), 2), " secs.)"), sep="\n")
   return(df_out)
 }
-
-#' Load system cost
-#'
-#' See 'pre_systemcost' function in ReEDS bokehpivot.
-#'
-#' @param runs datatable of runs to load system costs, generated from run_summary()
-#'
-#' @return data table with system costs
-#' @import data.table
-#' @export
-load_system_cost <- function(runs) {
-
-  ## load relevant datasets
-  sys_cost_raw <- load_run_data(runs, "systemcost_ba.csv")
-  crf <- load_run_data(runs, "crf.csv", folder="inputs_case")
-  df_capex_init <- load_run_data(runs, "df_capex_init.csv", folder="inputs_case")
-  sw <- load_run_data(runs, "switches.csv", folder="inputs_case")
-  scalars <- load_run_data(runs, "scalars.csv", folder="inputs_case")
-
-  # get evaluation period
-  sys_eval_years = sw[V1=='sys_eval_years']
-  trans_crp = scalars[V1=='trans_crp']
-
-  addyears = max(sys_eval_years, trans_crp)
-
-  #TODO: add checks for reading these files
-  sys_cost_inflated <- inflate_cost_data(runs, sys_cost_raw)
-
-  sys_cost_raw$cost
-
-
-  ## inflate
-
-
-  ## annualize using appropriate crp
-
-
-
-  ## discount
-
-
-}
-
-
 
 
 #' List bokeh reports
@@ -533,6 +456,7 @@ load_bokeh_data <- function(runs, result_name, report_name="reeds-report") {
   return(df_out)
 }
 
+
 #' @import sf
 #' @export
 load_ba_shapefile <- function(reedspath, shapefile="US_PCA") {
@@ -542,6 +466,7 @@ load_ba_shapefile <- function(reedspath, shapefile="US_PCA") {
   return(shp)
 }
 
+
 #' @import sf
 #' @export
 load_tx_shapefile <- function(reedspath, shapefile="transmission_routes") {
@@ -550,84 +475,3 @@ load_tx_shapefile <- function(reedspath, shapefile="transmission_routes") {
   return(shp)
 }
 
-
-
-## load supply curve data ####
-#' @export
-load_sc_files <- function(tech, update, folder=NULL, filebase="_supply-curve.csv"){
-
-  if(.Platform$OS.type == "unix") {
-    sc_path <- "/Volumes/ReEDS/Supply_Curve_Data"
-  } else {
-  # TODO: test windows path
-    sc_path <- "/nrelnas01/ReEDS/Supply_Curve_Data"
-  }
-
-  rev_path <- file.path(sc_path, tech, update, "reV")
-  check_dir_exists(rev_path)
-
-  ## first find relevant sc files
-  # if folder is supplied, look in there for post-processied supply curve files
-  if(!is.null(folder)){
-    allfiles <- list.files(file.path(rev_path, folder))
-    scfiles <-  file.path(rev_path, folder, allfiles[grepl(filebase, allfiles)] )
-    # otherwise, find sc files in scenario folders directly
-  } else{
-    alldirs <- list.dirs(file.path(rev_path), recursive = F)
-    scendirs <- alldirs[grepl("^[0-9]", basename(alldirs))]
-    scfiles <- c()
-    for (scendir in scendirs){
-      allfiles <- list.files(scendir)
-      scfiles <- c(scfiles, file.path(scendir, allfiles[grepl(filebase, allfiles)] ))
-    }
-  }
-
-  # check for supply curve files
-  if (length(scfiles) == 0 ){
-    stop(paste("No supply curve files found; check path to post-processing folder"))
-  } else{
-    print("Located the following sc files:")
-    for(scfile in scfiles){
-      print(scfile)
-    }
-  }
-
-  ## now loop over sc files and load
-  sc_data_all <- list()
-
-  for (scfile in scfiles) {
-    scenario <- gsub(filebase, "", basename(scfile))
-    print(paste0("Processing ", scenario))
-
-    # for testing
-    #sc_data <- fread(scfile, nrow=100)
-    sc_data <- fread(scfile)
-
-    # add update version and scenario info
-    sc_data$update <- update
-    sc_data$scenario <- scenario
-    sc_data_all <- append(sc_data_all, list(sc_data))
-    rm(sc_data)
-  }
-
-  # select for these  columns to simplify data
-  # col_select <- c("update", "scenario", "sc_point_gid", "cnty_fips", "state",
-  #                 "capacity_mw_dc", "capacity_mw_ac", "latitude", "longitude",
-  #                 "mean_capital_cost", "mean_system_capacity",
-  #                 "trans_cap_cost_per_mw_ac",
-  #                 "reinforcement_cost_per_mw_ac", "reinforcement_dist_km",
-  #                 "lcot", "total_lcoe",
-  #                 "eos_mult", "reg_mult")
-
-  # for (l in sc_data_all){
-  #   if (sum(!col_select %in% colnames(l)) > 0) {
-  #     print(sprintf("%s is missing the following columns: %s", unique(l$scenario), paste(col_select[! col_select %in% colnames(l)], collapse=", ")))
-  #   }
-  # }
-
-  # merge list results into 1 data.table
-  #sc_data_all <- lapply(sc_data_all, function(x) subset(x, select = col_select))
-  sc_data_out <- rbindlist(sc_data_all, use.names=T, fill=T)
-
-  return(sc_data_out)
-}
