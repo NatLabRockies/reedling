@@ -175,7 +175,7 @@ format_techs <- function(df, tech_col="i", mapping=NULL, col_from="raw", col_to=
     } else {
       cat("using custom tech_order", sep="\n")
       if(is.vector(order_techs) & !is.null(names(order_techs))){
-        tech_order <- names(tech_colors)
+        tech_order <- names(tech_order)
       } 
     }
     # apply ordering
